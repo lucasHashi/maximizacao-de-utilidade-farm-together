@@ -128,10 +128,10 @@ def extrair_valor(linha):
         valor = 0
     valor = float(valor)
     
-    if('Diamonds' in str(linha)):
-        moeda = 'diamante'
-    else:
+    if('Money' in str(linha)):
         moeda = 'dinheiro'
+    else:
+        moeda = 'diamante'
     
     return valor, moeda
 
@@ -388,6 +388,8 @@ def coletar_dados_tree(link):
                     propriedade = 'tipo_recurso'
                     tipo_recurso = extrair_recurso(linha)
                     propriedades[propriedade] = tipo_recurso
+        propriedades['quant_estacoes'] = len(propriedades['estacoes'])
+
     else:
         propriedades['custo'] = 0
         propriedades['url_img'] = ''
@@ -549,7 +551,7 @@ def coletar_dados_animal(link):
                 elif('Harvest' in str(propriedade) and not 'Info' in str(propriedade) and not 'each' in str(propriedade)):
                     ganho, moeda, xp = extrair_ganho(linha)
                     propriedades['xp'] = xp
-                    propriedades['ganho_base'] = ganho
+                    propriedades['ganho_total'] = ganho
                     propriedades['moeda_ganho'] = moeda
                 
                 elif('Harvest each' in str(propriedade)):
