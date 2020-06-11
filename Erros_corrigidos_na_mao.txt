@@ -1,0 +1,8 @@
+Abacot Ranger Duck: xp, ganho_base
+Aylesbury Duck: xp, ganho_base
+New Hampshire Chicken: xp, ganho_base
+Duckling: xp, ganho_base
+Landrace Pig: xp, ganho_base
+Leghorn Chicken: xp, ganho_base
+Reindeer: ganho_base
+Muscovy Duck: ganho_base
