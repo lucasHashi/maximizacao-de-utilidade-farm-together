@@ -4,7 +4,7 @@ import json
 
 
 def main():
-    with open('dados_completos_v2.json', 'r') as json_dados:
+    with open('dados_completos_v2_Editado.json', 'r') as json_dados:
         dict_dados = json.loads(json_dados.read())
     
     dict_dfs = json_to_dfs(dict_dados)
