@@ -92,7 +92,7 @@ def carregar_dados_por_item(itens_por_categoria_base):
                 #pprint(dados_item)
                 itens_por_categoria[tipo_colheita][categoria][nome_item] = dados_item
     
-    with open('dados_completos.json', 'w') as json_file:
+    with open('dados_completos_v2.json', 'w') as json_file:
         json.dump(itens_por_categoria, json_file)
 
 def coletar_dados_item(tipo_colheita, link):
@@ -214,6 +214,14 @@ def extrair_recurso(linha):
     tipo_recurso = linha.select('img')[0].get('alt')
     return tipo_recurso
 
+def extrair_nivel_fazenda(linha):
+    tipo_recurso = linha.select('td')[0].get_text().strip()
+    try:
+        tipo_recurso = float(tipo_recurso)
+    except:
+        tipo_recurso = 0
+    return tipo_recurso
+
 def extrair_p_pesca(linha):
     p_pesca = linha.select('td')[0].get_text()
     p_pesca = float(p_pesca.replace(' ', '').replace('%', ''))
@@ -300,7 +308,16 @@ def coletar_dados_crop(link):
         tabela_ok = False
     
     propriedades = {}
-    ganho_coletado = False
+    propriedades['custo'] = 0
+    propriedades['url_img'] = ''
+    propriedades['moeda_custo'] = 0
+    propriedades['estacoes'] = []
+    propriedades['ganho_base'] = 0
+    propriedades['xp'] = 0
+    propriedades['tipo_recurso'] = 0
+    propriedades['tempo'] = 0
+    propriedades['moeda_ganho'] = 'dinheiro'
+    propriedades['nivel_fazenda'] = 0
     if(tabela_ok):
         url_img = tabela.select('a.image')[0].get('href')
         propriedades['url_img'] = url_img
@@ -332,16 +349,11 @@ def coletar_dados_crop(link):
                     propriedade = 'tipo_recurso'
                     tipo_recurso = extrair_recurso(linha)
                     propriedades[propriedade] = tipo_recurso
-    else:
-        propriedades['custo'] = 0
-        propriedades['url_img'] = ''
-        propriedades['moeda_custo'] = 0
-        propriedades['estacoes'] = []
-        propriedades['ganho_base'] = 0
-        propriedades['xp'] = 0
-        propriedades['tipo_recurso'] = 0
-        propriedades['tempo'] = 0
-        propriedades['moeda_ganho'] = 'dinheiro'
+                
+                elif('Farm Level' in str(propriedade)):
+                    propriedade = 'nivel_fazenda'
+                    tipo_recurso = extrair_nivel_fazenda(linha)
+                    propriedades[propriedade] = tipo_recurso
     
     return propriedades
 
@@ -593,22 +605,6 @@ def coletar_dados_animal(link):
         propriedades['comida_total'] = 0
     
     return propriedades
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
