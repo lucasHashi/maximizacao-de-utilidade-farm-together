@@ -12,7 +12,7 @@ def main():
     colunas_final = ['tipo_colheita', 'nome', 'tipo_recurso','nivel_fazenda',
                     'custo', 'moeda_custo', 'xp', 'ganho_base',
                     'moeda_ganho', 'tempo', 'ganho_por_min',
-                    'xp_por_min', 'dinheiros_por_diamante', 'tipo_ganho']
+                    'xp_por_min', 'dinheiros_por_diamante', 'tipo_ganho', 'url_img']
     # Passar por cada df e incluir a coluna de ganho/minuto
     #--------- Crops ---------
     df_crops = dict_dfs['Crops']
