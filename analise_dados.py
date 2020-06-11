@@ -4,13 +4,13 @@ import json
 
 
 def main():
-    with open('dados_completos.json', 'r') as json_dados:
+    with open('dados_completos_v2.json', 'r') as json_dados:
         dict_dados = json.loads(json_dados.read())
     
     dict_dfs = json_to_dfs(dict_dados)
     
-    colunas_final = ['tipo_colheita', 'nome', 'tipo_recurso', 'custo',
-                    'moeda_custo', 'xp', 'ganho_base',
+    colunas_final = ['tipo_colheita', 'nome', 'tipo_recurso','nivel_fazenda',
+                    'custo', 'moeda_custo', 'xp', 'ganho_base',
                     'moeda_ganho', 'tempo', 'ganho_por_min',
                     'xp_por_min', 'dinheiros_por_diamante', 'tipo_ganho']
     # Passar por cada df e incluir a coluna de ganho/minuto
@@ -42,7 +42,8 @@ def main():
     df_final.sort_values(by=['tipo_colheita','nome'], inplace=True)
     df_final.reset_index(drop=True,inplace=True)
 
-    df_final.to_csv(path_or_buf='final.csv',index=False, float_format='%.2f', decimal=',', sep='?')
+    df_final.to_csv(path_or_buf='final.csv',index=False, float_format='%.2f', decimal='.')
+    df_final.to_csv(path_or_buf='final_excel.csv',index=False, float_format='%.2f', decimal=',', sep=';')
 
     #print(df_final.sort_values('ganho_por_min', ascending=False)[:20])
     

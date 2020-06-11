@@ -373,6 +373,15 @@ def coletar_dados_tree(link):
         tabela_ok = False
     
     propriedades = {}
+    propriedades['custo'] = 0
+    propriedades['url_img'] = ''
+    propriedades['moeda_custo'] = 0
+    propriedades['ganho_base'] = 0
+    propriedades['estacoes'] = []
+    propriedades['xp'] = 0
+    propriedades['tipo_recurso'] = 0
+    propriedades['moeda_ganho'] = 'dinheiro'
+    propriedades['nivel_fazenda'] = 0
     ganho_coletado = False
     if(tabela_ok):
         url_img = tabela.select('a.image')[0].get('href')
@@ -400,17 +409,13 @@ def coletar_dados_tree(link):
                     propriedade = 'tipo_recurso'
                     tipo_recurso = extrair_recurso(linha)
                     propriedades[propriedade] = tipo_recurso
+                
+                elif('Farm Level' in str(propriedade)):
+                    propriedade = 'nivel_fazenda'
+                    tipo_recurso = extrair_nivel_fazenda(linha)
+                    propriedades[propriedade] = tipo_recurso
+                
         propriedades['quant_estacoes'] = len(propriedades['estacoes'])
-
-    else:
-        propriedades['custo'] = 0
-        propriedades['url_img'] = ''
-        propriedades['moeda_custo'] = 0
-        propriedades['ganho_base'] = 0
-        propriedades['estacoes'] = []
-        propriedades['xp'] = 0
-        propriedades['tipo_recurso'] = 0
-        propriedades['moeda_ganho'] = 'dinheiro'
     
     return propriedades
 
@@ -430,6 +435,15 @@ def coletar_dados_flower(link):
         tabela_ok = False
     
     propriedades = {}
+    propriedades['custo'] = 0
+    propriedades['url_img'] = ''
+    propriedades['moeda_custo'] = 0
+    propriedades['ganho_base'] = 0
+    propriedades['xp'] = 0
+    propriedades['tipo_recurso'] = 0
+    propriedades['tempo'] = 0
+    propriedades['moeda_ganho'] = 'dinheiro'
+    propriedades['nivel_fazenda'] = 0
     ganho_coletado = False
     if(tabela_ok):
         url_img = tabela.select('a.image')[0].get('href')
@@ -457,15 +471,11 @@ def coletar_dados_flower(link):
                     propriedade = 'tipo_recurso'
                     tipo_recurso = extrair_recurso(linha)
                     propriedades[propriedade] = tipo_recurso
-    else:
-        propriedades['custo'] = 0
-        propriedades['url_img'] = ''
-        propriedades['moeda_custo'] = 0
-        propriedades['ganho_base'] = 0
-        propriedades['xp'] = 0
-        propriedades['tipo_recurso'] = 0
-        propriedades['tempo'] = 0
-        propriedades['moeda_ganho'] = 'dinheiro'
+                
+                elif('Farm Level' in str(propriedade)):
+                    propriedade = 'nivel_fazenda'
+                    tipo_recurso = extrair_nivel_fazenda(linha)
+                    propriedades[propriedade] = tipo_recurso
     
     return propriedades
 
@@ -485,6 +495,18 @@ def coletar_dados_pond(link):
         tabela_ok = False
     
     propriedades = {}
+    propriedades['custo'] = 0
+    propriedades['url_img'] = ''
+    propriedades['tempo'] = 0
+    propriedades['moeda_custo'] = 0
+    propriedades['ganho_base'] = 0
+    propriedades['ganho_grande'] = 0
+    propriedades['ganho_pequeno'] = 0
+    propriedades['moeda_ganho'] = 'dinheiro'
+    propriedades['xp'] = 0
+    propriedades['p_pesca'] = 0
+    propriedades['p_ganho_grande'] = 0
+    propriedades['nivel_fazenda'] = 0
     ganho_coletado = False
     if(tabela_ok):
         url_img = tabela.select('a.image')[0].get('href')
@@ -517,18 +539,11 @@ def coletar_dados_pond(link):
                     p_pesca = extrair_p_pesca(linha)
                     propriedades['p_pesca'] = p_pesca
                     propriedades['p_ganho_grande'] = P_PEIXE_GRANDE
-    else:
-        propriedades['custo'] = 0
-        propriedades['url_img'] = ''
-        propriedades['tempo'] = 0
-        propriedades['moeda_custo'] = 0
-        propriedades['ganho_base'] = 0
-        propriedades['ganho_grande'] = 0
-        propriedades['ganho_pequeno'] = 0
-        propriedades['moeda_ganho'] = 'dinheiro'
-        propriedades['xp'] = 0
-        propriedades['p_pesca'] = 0
-        propriedades['p_ganho_grande'] = 0
+                
+                elif('Farm Level' in str(propriedade)):
+                    propriedade = 'nivel_fazenda'
+                    tipo_recurso = extrair_nivel_fazenda(linha)
+                    propriedades[propriedade] = tipo_recurso
     
     return propriedades
 
@@ -548,6 +563,19 @@ def coletar_dados_animal(link):
         tabela_ok = False
     
     propriedades = {}
+    propriedades['custo'] = 0
+    propriedades['url_img'] = ''
+    propriedades['moeda_custo'] = 0
+    propriedades['ganho_base'] = 0
+    propriedades['xp'] = 0
+    propriedades['tipo_recurso'] = 0
+    propriedades['tempo'] = 0
+    propriedades['moeda_ganho'] = 'dinheiro'
+    propriedades['comida_custo'] = 0
+    propriedades['comida_tempo'] = 0
+    propriedades['comida_vezes'] = 0
+    propriedades['comida_total'] = 0
+    propriedades['nivel_fazenda'] = 0
     ganho_coletado = False
     if(tabela_ok):
         url_img = tabela.select('a.image')[0].get('href')
@@ -590,19 +618,11 @@ def coletar_dados_animal(link):
                     propriedade = 'comida_total'
                     comida_total = extrair_comida_total(linha)
                     propriedades[propriedade] = comida_total
-    else:
-        propriedades['custo'] = 0
-        propriedades['url_img'] = ''
-        propriedades['moeda_custo'] = 0
-        propriedades['ganho_base'] = 0
-        propriedades['xp'] = 0
-        propriedades['tipo_recurso'] = 0
-        propriedades['tempo'] = 0
-        propriedades['moeda_ganho'] = 'dinheiro'
-        propriedades['comida_custo'] = 0
-        propriedades['comida_tempo'] = 0
-        propriedades['comida_vezes'] = 0
-        propriedades['comida_total'] = 0
+                
+                elif('Farm Level' in str(propriedade)):
+                    propriedade = 'nivel_fazenda'
+                    tipo_recurso = extrair_nivel_fazenda(linha)
+                    propriedades[propriedade] = tipo_recurso
     
     return propriedades
 
